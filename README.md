@@ -1,7 +1,7 @@
 # 轨道交通文献自动推送 (Railway Literature Auto-Push)
 
 自动抓取 Elsevier/Scopus 数据库中最新的轨道交通领域前沿论文，并通过自动化工作流生成静态网页进行展示。
-注：这是我的第一个GitHub项目，全程在Codex和Gemini的帮助下完成，希望这是好的开始。(还有些问题在申请许可证:joy:)
+注：这是我的第一个GitHub项目，全程在Codex和Gemini的帮助下完成，希望这是好的开始。(还有些问题在申请许可证😂)
 
 ## 核心功能
 * **自动化抓取**：利用 GitHub Actions 定时触发 Python 脚本，自动调用 Scopus API 检索最新文献。
