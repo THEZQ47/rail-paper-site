@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-04-17T17:42:08",
+  "generated_at": "2026-04-17T11:47:50",
   "window": {
-    "from_ts": "2026-04-16T17:42:08",
-    "to_ts": "2026-04-17T17:42:08"
+    "from_ts": "2026-04-16T11:47:50",
+    "to_ts": "2026-04-17T11:47:50"
   },
   "stats": {
     "total_raw_records": 0,
@@ -19,9 +19,9 @@
     },
     {
       "source": "scopus",
-      "status": "skipped",
-      "reason": "auth_missing",
-      "alert": "missing_headers=X-ELS-APIKey",
+      "status": "error",
+      "reason": "auth_forbidden",
+      "alert": "scopus returned 401",
       "record_count": 0
     },
     {
