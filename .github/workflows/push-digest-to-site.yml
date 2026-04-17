@@ -32,14 +32,13 @@ jobs:
           IEEE_API_KEY: ${{ secrets.IEEE_API_KEY }}
           SPRINGER_API_KEY: ${{ secrets.SPRINGER_API_KEY }}
         run: |
-          python -m src.digest_pipeline \
-            --config config/sources.yaml \
-            --lookback-hours 24 \
-            --max-items 10 \
-            --output-json web/data/latest_digest.json \
-            --output-markdown web/data/latest_digest.md
+          python -m src.digest_pipeline --config config/sources.yaml --lookback-hours 24 --max-items 10 --output-json web/data/latest_digest.json --output-markdown web/data/latest_digest.md - name: Commit and push if changed
+             
+            
+            
+            
 
-      - name: Commit and push if changed
+      
         run: |
           if [[ -n "$(git status --porcelain web/data/latest_digest.json web/data/latest_digest.md)" ]]; then
             git config user.name "github-actions[bot]"
