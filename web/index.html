@@ -1,0 +1,492 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>轨道交通文献推送主页</title>
+  <style>
+    :root {
+      --bg: #f3f6f8;
+      --panel: #ffffff;
+      --ink: #1f2937;
+      --muted: #5b6673;
+      --line: #d4dde6;
+      --brand: #115e59;
+      --brand-soft: #e0f2f1;
+      --warn: #9a3412;
+      --radius: 14px;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: "Microsoft YaHei", "PingFang SC", "Noto Sans SC", sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 10% 0%, #e6fffb 0%, transparent 36%),
+        radial-gradient(circle at 90% 100%, #fee2e2 0%, transparent 30%),
+        var(--bg);
+      min-height: 100vh;
+    }
+
+    .wrap {
+      width: min(980px, 92vw);
+      margin: 32px auto 56px;
+    }
+
+    .hero {
+      background: linear-gradient(120deg, #0f766e 0%, #155e75 48%, #1d4ed8 100%);
+      color: #f8fafc;
+      border-radius: 20px;
+      padding: 26px 24px;
+      box-shadow: 0 10px 28px rgba(2, 6, 23, 0.2);
+    }
+
+    .hero h1 {
+      margin: 0 0 8px;
+      font-size: clamp(24px, 3.6vw, 34px);
+      line-height: 1.2;
+      letter-spacing: 0.4px;
+    }
+
+    .hero p {
+      margin: 0;
+      opacity: 0.92;
+      line-height: 1.65;
+    }
+
+    .grid {
+      margin-top: 18px;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 14px;
+    }
+
+    @media (min-width: 920px) {
+      .grid {
+        grid-template-columns: 360px 1fr;
+        align-items: start;
+      }
+    }
+
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 16px;
+      box-shadow: 0 4px 14px rgba(15, 23, 42, 0.04);
+    }
+
+    .panel h2 {
+      font-size: 18px;
+      margin: 0 0 12px;
+      color: #0f172a;
+    }
+
+    .row {
+      display: grid;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+
+    label {
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    input, textarea {
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 10px;
+      font: inherit;
+      color: var(--ink);
+      background: #fff;
+    }
+
+    textarea {
+      min-height: 80px;
+      resize: vertical;
+    }
+
+    .row-inline {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+
+    .btns {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    button {
+      border: 1px solid transparent;
+      border-radius: 10px;
+      padding: 9px 13px;
+      font: inherit;
+      cursor: pointer;
+      transition: transform 120ms ease, box-shadow 120ms ease, background 120ms ease;
+    }
+
+    button:hover {
+      transform: translateY(-1px);
+    }
+
+    .primary {
+      background: var(--brand);
+      color: white;
+      box-shadow: 0 4px 12px rgba(17, 94, 89, 0.26);
+    }
+
+    .soft {
+      background: var(--brand-soft);
+      color: #0f766e;
+      border-color: #99f6e4;
+    }
+
+    .danger {
+      background: #fff1f2;
+      color: var(--warn);
+      border-color: #fecdd3;
+    }
+
+    .topbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 12px;
+      align-items: center;
+    }
+
+    .topbar input {
+      flex: 1;
+      min-width: 180px;
+    }
+
+    .meta {
+      font-size: 12px;
+      color: var(--muted);
+      margin-bottom: 10px;
+    }
+
+    .cards {
+      display: grid;
+      gap: 10px;
+    }
+
+    .card {
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 12px;
+      background: #fcfefe;
+    }
+
+    .card h3 {
+      margin: 0 0 8px;
+      font-size: 16px;
+      line-height: 1.4;
+      color: #0f172a;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin: 8px 0;
+    }
+
+    .tag {
+      font-size: 12px;
+      padding: 3px 8px;
+      border-radius: 999px;
+      border: 1px solid #bae6fd;
+      background: #eff6ff;
+      color: #1e3a8a;
+    }
+
+    .link {
+      color: #155e75;
+      text-decoration: none;
+    }
+
+    .link:hover {
+      text-decoration: underline;
+    }
+
+    .empty {
+      border: 1px dashed var(--line);
+      border-radius: 10px;
+      padding: 14px;
+      color: var(--muted);
+      background: #f8fafc;
+      line-height: 1.7;
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <section class="hero">
+      <h1>轨道交通文献推送主页</h1>
+      <p>
+        研究方向：列车调度优化与精确求解算法。你可以在这里持续沉淀每日推送，形成自己的可检索文献池。
+      </p>
+    </section>
+
+    <section class="grid">
+      <article class="panel">
+        <h2>新增文献卡片</h2>
+        <div class="row">
+          <label for="title">题目</label>
+          <input id="title" placeholder="例如：Train rescheduling with Benders decomposition" />
+        </div>
+        <div class="row-inline">
+          <div class="row">
+            <label for="source">来源库/期刊</label>
+            <input id="source" placeholder="Scopus / WoS / IEEE..." />
+          </div>
+          <div class="row">
+            <label for="year">年份</label>
+            <input id="year" type="number" min="1900" max="2100" placeholder="2026" />
+          </div>
+        </div>
+        <div class="row-inline">
+          <div class="row">
+            <label for="score">相关性评分</label>
+            <input id="score" type="number" min="-20" max="100" value="0" />
+          </div>
+          <div class="row">
+            <label for="link">链接</label>
+            <input id="link" placeholder="https://..." />
+          </div>
+        </div>
+        <div class="row">
+          <label for="tags">标签（逗号分隔）</label>
+          <input id="tags" placeholder="Benders, 运行图, 重调度" />
+        </div>
+        <div class="row">
+          <label for="takeaway">研究提示</label>
+          <textarea id="takeaway" placeholder="一句话总结核心建模与求解亮点"></textarea>
+        </div>
+        <div class="btns">
+          <button class="primary" id="addBtn" type="button">保存卡片</button>
+          <button class="soft" id="exportBtn" type="button">导出 JSON</button>
+          <button class="soft" id="importBtn" type="button">导入 JSON</button>
+          <button class="danger" id="clearBtn" type="button">清空全部</button>
+        </div>
+        <input id="fileInput" type="file" accept="application/json" hidden />
+      </article>
+
+      <article class="panel">
+        <div class="topbar">
+          <input id="search" placeholder="按题目/标签/来源筛选..." />
+          <button class="soft" id="sortBtn" type="button">按评分排序</button>
+        </div>
+        <div class="meta" id="meta"></div>
+        <div class="cards" id="cards"></div>
+      </article>
+    </section>
+  </main>
+
+  <script>
+    const STORAGE_KEY = "swjtu_rail_digest_cards_v1";
+    let cards = loadCards();
+    let sortByScoreDesc = true;
+
+    function loadCards() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        const data = raw ? JSON.parse(raw) : [];
+        return Array.isArray(data) ? data : [];
+      } catch {
+        return [];
+      }
+    }
+
+    function saveCards() {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(cards));
+    }
+
+    function getFormValue(id) {
+      return document.getElementById(id).value.trim();
+    }
+
+    function resetForm() {
+      ["title", "source", "year", "score", "link", "tags", "takeaway"].forEach((id) => {
+        document.getElementById(id).value = id === "score" ? "0" : "";
+      });
+      document.getElementById("title").focus();
+    }
+
+    function addCard() {
+      const title = getFormValue("title");
+      if (!title) {
+        alert("题目不能为空。");
+        return;
+      }
+      const entry = {
+        id: Date.now().toString(),
+        date: new Date().toLocaleString("zh-CN", { hour12: false }),
+        title,
+        source: getFormValue("source"),
+        year: getFormValue("year"),
+        score: Number(getFormValue("score") || 0),
+        link: getFormValue("link"),
+        tags: getFormValue("tags")
+          .split(",")
+          .map((t) => t.trim())
+          .filter(Boolean),
+        takeaway: getFormValue("takeaway")
+      };
+      cards.unshift(entry);
+      saveCards();
+      render();
+      resetForm();
+    }
+
+    function removeCard(id) {
+      cards = cards.filter((item) => item.id !== id);
+      saveCards();
+      render();
+    }
+
+    function clearAll() {
+      if (!confirm("确认清空所有文献卡片吗？")) return;
+      cards = [];
+      saveCards();
+      render();
+    }
+
+    function exportJson() {
+      const blob = new Blob([JSON.stringify(cards, null, 2)], { type: "application/json" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `rail-digest-cards-${new Date().toISOString().slice(0, 10)}.json`;
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+
+    function importJson(file) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        try {
+          const incoming = JSON.parse(String(reader.result || "[]"));
+          if (!Array.isArray(incoming)) throw new Error("invalid");
+          cards = incoming.map((item, idx) => ({
+            id: item.id ? String(item.id) : `${Date.now()}-${idx}`,
+            date: item.date || "",
+            title: item.title || "",
+            source: item.source || "",
+            year: item.year || "",
+            score: Number(item.score || 0),
+            link: item.link || "",
+            tags: Array.isArray(item.tags) ? item.tags : [],
+            takeaway: item.takeaway || ""
+          }));
+          saveCards();
+          render();
+        } catch {
+          alert("导入失败：请确认是有效的 JSON 数组文件。");
+        }
+      };
+      reader.readAsText(file, "utf-8");
+    }
+
+    function filterAndSortCards() {
+      const keyword = document.getElementById("search").value.trim().toLowerCase();
+      let list = cards.filter((item) => {
+        if (!keyword) return true;
+        const text = [item.title, item.source, item.takeaway, ...(item.tags || [])]
+          .join(" ")
+          .toLowerCase();
+        return text.includes(keyword);
+      });
+
+      list = [...list].sort((a, b) => {
+        if (sortByScoreDesc) return (b.score || 0) - (a.score || 0);
+        return String(b.date || "").localeCompare(String(a.date || ""));
+      });
+      return list;
+    }
+
+    function render() {
+      const list = filterAndSortCards();
+      const meta = document.getElementById("meta");
+      const cardsNode = document.getElementById("cards");
+      meta.textContent = `共 ${cards.length} 条记录，当前显示 ${list.length} 条。`;
+
+      if (!list.length) {
+        cardsNode.innerHTML = `
+          <div class="empty">
+            暂无文献卡片。<br/>
+            你可以从左侧录入每日推送结果，逐步积累自己的研究文献库。
+          </div>
+        `;
+        return;
+      }
+
+      cardsNode.innerHTML = list.map((item) => {
+        const tags = (item.tags || []).map((tag) => `<span class="tag">${escapeHtml(tag)}</span>`).join("");
+        const link = item.link
+          ? `<a class="link" href="${escapeAttr(item.link)}" target="_blank" rel="noreferrer">访问论文链接</a>`
+          : "未提供链接";
+        return `
+          <section class="card">
+            <h3>${escapeHtml(item.title)}</h3>
+            <div class="meta">来源：${escapeHtml(item.source || "未填写")} ｜ 年份：${escapeHtml(item.year || "未填写")} ｜ 评分：${Number(item.score || 0)}</div>
+            <div>${link}</div>
+            <div class="tags">${tags || "<span class='tag'>未标注标签</span>"}</div>
+            <div>${escapeHtml(item.takeaway || "未填写研究提示")}</div>
+            <div class="meta">录入时间：${escapeHtml(item.date || "未知")}</div>
+            <button class="danger" type="button" data-remove="${escapeAttr(item.id)}">删除</button>
+          </section>
+        `;
+      }).join("");
+    }
+
+    function escapeHtml(text) {
+      return String(text)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#39;");
+    }
+
+    function escapeAttr(text) {
+      return escapeHtml(text).replace(/`/g, "&#96;");
+    }
+
+    document.getElementById("addBtn").addEventListener("click", addCard);
+    document.getElementById("clearBtn").addEventListener("click", clearAll);
+    document.getElementById("exportBtn").addEventListener("click", exportJson);
+    document.getElementById("importBtn").addEventListener("click", () => {
+      document.getElementById("fileInput").click();
+    });
+    document.getElementById("fileInput").addEventListener("change", (event) => {
+      const file = event.target.files && event.target.files[0];
+      if (file) importJson(file);
+      event.target.value = "";
+    });
+    document.getElementById("search").addEventListener("input", render);
+    document.getElementById("sortBtn").addEventListener("click", () => {
+      sortByScoreDesc = !sortByScoreDesc;
+      document.getElementById("sortBtn").textContent = sortByScoreDesc ? "按评分排序" : "按时间排序";
+      render();
+    });
+    document.getElementById("cards").addEventListener("click", (event) => {
+      const target = event.target;
+      if (!(target instanceof HTMLElement)) return;
+      const removeId = target.getAttribute("data-remove");
+      if (removeId) removeCard(removeId);
+    });
+
+    render();
+  </script>
+</body>
+</html>
+

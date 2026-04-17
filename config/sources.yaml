@@ -1,0 +1,71 @@
+{
+  "defaults": {
+    "timeout_seconds": 15,
+    "max_retries": 3,
+    "backoff_seconds": 1.0,
+    "page_size": 25
+  },
+  "sources": {
+    "wos": {
+      "enabled": true,
+      "base_url": "https://api.clarivate.com/apis/wos-starter/v1/documents",
+      "rate_limit_per_minute": 30,
+      "auth_mode": "api_key",
+      "auth": {
+        "header_from_env": {
+          "X-ApiKey": "WOS_API_KEY"
+        }
+      },
+      "retry": {
+        "max_retries": 3,
+        "backoff_seconds": 1.0
+      }
+    },
+    "scopus": {
+      "enabled": true,
+      "base_url": "https://api.elsevier.com/content/search/scopus",
+      "rate_limit_per_minute": 20,
+      "auth_mode": "api_key",
+      "auth": {
+        "header_from_env": {
+          "X-ELS-APIKey": "SCOPUS_API_KEY",
+          "X-ELS-Insttoken": "SCOPUS_INST_TOKEN"
+        }
+      },
+      "retry": {
+        "max_retries": 3,
+        "backoff_seconds": 1.0
+      }
+    },
+    "ieee": {
+      "enabled": true,
+      "base_url": "https://ieeexploreapi.ieee.org/api/v1/search/articles",
+      "rate_limit_per_minute": 20,
+      "auth_mode": "api_key",
+      "auth": {
+        "header_from_env": {
+          "x-api-key": "IEEE_API_KEY"
+        }
+      },
+      "retry": {
+        "max_retries": 3,
+        "backoff_seconds": 1.0
+      }
+    },
+    "springer": {
+      "enabled": true,
+      "base_url": "https://api.springernature.com/metadata/json",
+      "rate_limit_per_minute": 20,
+      "auth_mode": "api_key",
+      "auth": {
+        "header_from_env": {
+          "X-ApiKey": "SPRINGER_API_KEY"
+        }
+      },
+      "retry": {
+        "max_retries": 3,
+        "backoff_seconds": 1.0
+      }
+    }
+  }
+}
