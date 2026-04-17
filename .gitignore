@@ -1,0 +1,5 @@
+__pycache__/
+*.pyc
+.env
+.env.*
+tests/_tmp_latest_digest.json

@@ -284,6 +284,7 @@
         <div class="topbar">
           <input id="search" placeholder="按题目/标签/来源筛选..." />
           <button class="soft" id="sortBtn" type="button">按评分排序</button>
+          <button class="soft" id="refreshBtn" type="button">同步站点日报</button>
         </div>
         <div class="meta" id="meta"></div>
         <div class="cards" id="cards"></div>
@@ -293,7 +294,10 @@
 
   <script>
     const STORAGE_KEY = "swjtu_rail_digest_cards_v1";
+    const REMOTE_DIGEST_URL = "./data/latest_digest.json";
     let cards = loadCards();
+    let remoteCards = [];
+    let remoteDigestInfo = "";
     let sortByScoreDesc = true;
 
     function loadCards() {
@@ -339,7 +343,8 @@
           .split(",")
           .map((t) => t.trim())
           .filter(Boolean),
-        takeaway: getFormValue("takeaway")
+        takeaway: getFormValue("takeaway"),
+        remote: false
       };
       cards.unshift(entry);
       saveCards();
@@ -348,13 +353,17 @@
     }
 
     function removeCard(id) {
+      if (String(id).startsWith("remote-")) {
+        alert("自动同步数据不可单条删除，请等待下一次同步覆盖。");
+        return;
+      }
       cards = cards.filter((item) => item.id !== id);
       saveCards();
       render();
     }
 
     function clearAll() {
-      if (!confirm("确认清空所有文献卡片吗？")) return;
+      if (!confirm("确认清空所有本地文献卡片吗？")) return;
       cards = [];
       saveCards();
       render();
@@ -365,7 +374,7 @@
       const url = URL.createObjectURL(blob);
       const a = document.createElement("a");
       a.href = url;
-      a.download = `rail-digest-cards-${new Date().toISOString().slice(0, 10)}.json`;
+      a.download = `rail-digest-cards-local-${new Date().toISOString().slice(0, 10)}.json`;
       a.click();
       URL.revokeObjectURL(url);
     }
@@ -385,7 +394,8 @@
             score: Number(item.score || 0),
             link: item.link || "",
             tags: Array.isArray(item.tags) ? item.tags : [],
-            takeaway: item.takeaway || ""
+            takeaway: item.takeaway || "",
+            remote: false
           }));
           saveCards();
           render();
@@ -396,9 +406,45 @@
       reader.readAsText(file, "utf-8");
     }
 
-    function filterAndSortCards() {
+    function buildRemoteCards(payload) {
+      if (!payload || !Array.isArray(payload.cards)) return [];
+      return payload.cards.map((item, idx) => ({
+        id: `remote-${payload.generated_at || "unknown"}-${idx}`,
+        date: payload.generated_at || "",
+        title: item.title || "",
+        source: item.source || "",
+        year: item.year || "",
+        score: Number(item.relevance_score || 0),
+        link: item.url || "",
+        tags: [
+          ...(Array.isArray(item.exact_method_tags) ? item.exact_method_tags : []),
+          ...(Array.isArray(item.problem_tags) ? item.problem_tags : [])
+        ],
+        takeaway: item.one_line_takeaway || "",
+        remote: true
+      }));
+    }
+
+    function mergeCards(remoteItems, localItems) {
+      const merged = [...remoteItems, ...localItems];
+      const dedup = [];
+      const seen = new Set();
+      for (const item of merged) {
+        const key = `${normalizeTitle(item.title)}::${item.year || ""}`;
+        if (seen.has(key)) continue;
+        seen.add(key);
+        dedup.push(item);
+      }
+      return dedup;
+    }
+
+    function normalizeTitle(text) {
+      return String(text || "").toLowerCase().replace(/[^a-z0-9\u4e00-\u9fa5]+/g, "");
+    }
+
+    function filterAndSortCards(inputCards) {
       const keyword = document.getElementById("search").value.trim().toLowerCase();
-      let list = cards.filter((item) => {
+      let list = inputCards.filter((item) => {
         if (!keyword) return true;
         const text = [item.title, item.source, item.takeaway, ...(item.tags || [])]
           .join(" ")
@@ -413,17 +459,42 @@
       return list;
     }
 
+    async function refreshRemoteDigest() {
+      const button = document.getElementById("refreshBtn");
+      const originalText = button.textContent;
+      button.disabled = true;
+      button.textContent = "同步中...";
+      try {
+        const response = await fetch(`${REMOTE_DIGEST_URL}?t=${Date.now()}`, { cache: "no-store" });
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        const payload = await response.json();
+        remoteCards = buildRemoteCards(payload);
+        remoteDigestInfo = payload.generated_at
+          ? `最近同步：${String(payload.generated_at).replace("T", " ").slice(0, 19)}`
+          : "";
+      } catch (error) {
+        remoteCards = [];
+        remoteDigestInfo = "尚未读取到站点日报数据";
+      } finally {
+        button.disabled = false;
+        button.textContent = originalText;
+        render();
+      }
+    }
+
     function render() {
-      const list = filterAndSortCards();
+      const mergedCards = mergeCards(remoteCards, cards);
+      const list = filterAndSortCards(mergedCards);
       const meta = document.getElementById("meta");
       const cardsNode = document.getElementById("cards");
-      meta.textContent = `共 ${cards.length} 条记录，当前显示 ${list.length} 条。`;
+      const suffix = remoteDigestInfo ? ` ｜ ${remoteDigestInfo}` : "";
+      meta.textContent = `自动同步 ${remoteCards.length} 条，本地记录 ${cards.length} 条，当前显示 ${list.length} 条${suffix}`;
 
       if (!list.length) {
         cardsNode.innerHTML = `
           <div class="empty">
             暂无文献卡片。<br/>
-            你可以从左侧录入每日推送结果，逐步积累自己的研究文献库。
+            你可以从左侧录入结果，或点击“同步站点日报”读取自动推送数据。
           </div>
         `;
         return;
@@ -434,6 +505,9 @@
         const link = item.link
           ? `<a class="link" href="${escapeAttr(item.link)}" target="_blank" rel="noreferrer">访问论文链接</a>`
           : "未提供链接";
+        const action = item.remote
+          ? "<span class='tag'>自动同步</span>"
+          : `<button class="danger" type="button" data-remove="${escapeAttr(item.id)}">删除</button>`;
         return `
           <section class="card">
             <h3>${escapeHtml(item.title)}</h3>
@@ -441,8 +515,8 @@
             <div>${link}</div>
             <div class="tags">${tags || "<span class='tag'>未标注标签</span>"}</div>
             <div>${escapeHtml(item.takeaway || "未填写研究提示")}</div>
-            <div class="meta">录入时间：${escapeHtml(item.date || "未知")}</div>
-            <button class="danger" type="button" data-remove="${escapeAttr(item.id)}">删除</button>
+            <div class="meta">时间：${escapeHtml(item.date || "未知")}</div>
+            ${action}
           </section>
         `;
       }).join("");
@@ -478,6 +552,7 @@
       document.getElementById("sortBtn").textContent = sortByScoreDesc ? "按评分排序" : "按时间排序";
       render();
     });
+    document.getElementById("refreshBtn").addEventListener("click", refreshRemoteDigest);
     document.getElementById("cards").addEventListener("click", (event) => {
       const target = event.target;
       if (!(target instanceof HTMLElement)) return;
@@ -486,7 +561,8 @@
     });
 
     render();
+    refreshRemoteDigest();
+    setInterval(refreshRemoteDigest, 5 * 60 * 1000);
   </script>
 </body>
 </html>
-

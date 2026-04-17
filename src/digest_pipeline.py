@@ -292,6 +292,59 @@ def render_report_markdown(report: DigestReport) -> str:
     return "\n".join(lines)
 
 
+def report_to_site_payload(report: DigestReport) -> dict[str, Any]:
+    return {
+        "generated_at": report.generated_at.isoformat(timespec="seconds"),
+        "window": {
+            "from_ts": report.from_ts.isoformat(timespec="seconds"),
+            "to_ts": report.to_ts.isoformat(timespec="seconds"),
+        },
+        "stats": {
+            "total_raw_records": report.total_raw_records,
+            "total_unique_records": report.total_unique_records,
+            "card_count": len(report.cards),
+        },
+        "source_results": [
+            {
+                "source": item.source,
+                "status": item.status,
+                "reason": item.reason,
+                "alert": item.alert,
+                "record_count": len(item.records),
+            }
+            for item in report.source_results
+        ],
+        "cards": [
+            {
+                "rank": card.rank,
+                "title": card.title,
+                "source": card.source,
+                "year": card.year,
+                "url": card.url,
+                "relevance_score": card.relevance_score,
+                "exact_method_tags": list(card.exact_method_tags),
+                "problem_tags": list(card.problem_tags),
+                "one_line_takeaway": card.one_line_takeaway,
+            }
+            for card in report.cards
+        ],
+        "notes": list(report.notes),
+    }
+
+
+def write_report_json(report: DigestReport, output_path: str | Path) -> None:
+    path = Path(output_path)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    payload = report_to_site_payload(report)
+    path.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
+
+
+def write_report_markdown(report: DigestReport, output_path: str | Path) -> None:
+    path = Path(output_path)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(render_report_markdown(report), encoding="utf-8")
+
+
 def _make_takeaway(method_tags: list[str], problem_tags: list[str]) -> str:
     if method_tags and problem_tags:
         return f"重点关注 {', '.join(problem_tags)} 场景，使用 {', '.join(method_tags)} 等精确求解。"
@@ -316,6 +369,8 @@ def _build_cli() -> argparse.ArgumentParser:
     parser.add_argument("--query", default=DEFAULT_QUERY, help="检索查询语句")
     parser.add_argument("--lookback-hours", type=int, default=24, help="回看窗口（小时）")
     parser.add_argument("--max-items", type=int, default=10, help="最多输出条数")
+    parser.add_argument("--output-json", default="", help="可选：将报告写入站点 JSON 文件")
+    parser.add_argument("--output-markdown", default="", help="可选：将报告写入 Markdown 文件")
     return parser
 
 
@@ -327,9 +382,12 @@ def main() -> None:
         lookback_hours=args.lookback_hours,
         max_items=args.max_items,
     )
+    if args.output_json:
+        write_report_json(report, args.output_json)
+    if args.output_markdown:
+        write_report_markdown(report, args.output_markdown)
     print(render_report_markdown(report))
 
 
 if __name__ == "__main__":
     main()
-

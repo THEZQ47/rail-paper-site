@@ -1,0 +1,46 @@
+{
+  "generated_at": "2026-04-17T17:42:08",
+  "window": {
+    "from_ts": "2026-04-16T17:42:08",
+    "to_ts": "2026-04-17T17:42:08"
+  },
+  "stats": {
+    "total_raw_records": 0,
+    "total_unique_records": 0,
+    "card_count": 0
+  },
+  "source_results": [
+    {
+      "source": "wos",
+      "status": "skipped",
+      "reason": "auth_missing",
+      "alert": "missing_headers=X-ApiKey",
+      "record_count": 0
+    },
+    {
+      "source": "scopus",
+      "status": "skipped",
+      "reason": "auth_missing",
+      "alert": "missing_headers=X-ELS-APIKey",
+      "record_count": 0
+    },
+    {
+      "source": "ieee",
+      "status": "skipped",
+      "reason": "auth_missing",
+      "alert": "missing_headers=x-api-key",
+      "record_count": 0
+    },
+    {
+      "source": "springer",
+      "status": "skipped",
+      "reason": "auth_missing",
+      "alert": "missing_headers=X-ApiKey",
+      "record_count": 0
+    }
+  ],
+  "cards": [],
+  "notes": [
+    "今日未从已启用数据源提取到可用论文，请检查凭据或扩大检索窗口。"
+  ]
+}

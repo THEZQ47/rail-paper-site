@@ -27,8 +27,8 @@ class ScopusAdapter(HttpPaperAdapter):
         )
 
     def required_headers(self) -> list[str]:
-        # Elsevier 常见接入需要 API Key + 机构 token。
-        return ["X-ELS-APIKey", "X-ELS-Insttoken"]
+        # API Key 为必需；机构 token 在部分订阅/网络策略下才需要。
+        return ["X-ELS-APIKey"]
 
     def build_query_params(
         self,
@@ -122,4 +122,3 @@ def _normalize_doi(value: Any) -> str | None:
         return None
     text = str(value).strip().lower()
     return text or None
-

@@ -2,10 +2,17 @@ from __future__ import annotations
 
 import unittest
 from datetime import datetime, timedelta
+from pathlib import Path
 from typing import Mapping
+from unittest.mock import patch
 
 from src.adapters.base import PaperSourceAdapter
-from src.digest_pipeline import render_report_markdown, run_daily_digest
+from src.digest_pipeline import (
+    render_report_markdown,
+    report_to_site_payload,
+    run_daily_digest,
+    write_report_json,
+)
 from src.schemas import PaperRecord, SourceResult
 
 
@@ -125,7 +132,42 @@ class DigestPipelineTests(unittest.TestCase):
         self.assertIn("未取到可用论文", markdown)
         self.assertIn("auth_missing", markdown)
 
+    def test_can_export_site_payload_json(self) -> None:
+        adapters = {
+            "wos": StaticAdapter(
+                "wos",
+                SourceResult(
+                    source="wos",
+                    status="ok",
+                    records=(
+                        PaperRecord(
+                            title="Train scheduling by integer programming",
+                            source="wos",
+                            year=2026,
+                            url="https://example.org/x",
+                        ),
+                    ),
+                ),
+            ),
+            "scopus": StaticAdapter("scopus", SourceResult(source="scopus", status="skipped", reason="auth_missing")),
+        }
+        report = run_daily_digest(
+            config=self.config,
+            query="train scheduling",
+            from_ts=self.from_ts,
+            to_ts=self.to_ts,
+            adapters=adapters,
+            auth_provider=StaticAuthProvider(),
+        )
+
+        payload = report_to_site_payload(report)
+        self.assertEqual(payload["stats"]["card_count"], 1)
+        self.assertEqual(payload["cards"][0]["title"], "Train scheduling by integer programming")
+        self.assertIn("generated_at", payload)
+        with patch("pathlib.Path.write_text") as mocked_write:
+            write_report_json(report, Path("tests") / "_tmp_latest_digest.json")
+            self.assertEqual(mocked_write.call_count, 1)
+
 
 if __name__ == "__main__":
     unittest.main()
-
