@@ -1,13 +1,13 @@
 # 轨道交通列车调度文献日报
 
-- 生成时间: 2026-04-18 11:13:08
-- 检索窗口: 2026-04-17 11:13 ~ 2026-04-18 11:13
+- 生成时间: 2026-04-18 11:14:20
+- 检索窗口: 2026-04-17 11:14 ~ 2026-04-18 11:14
 - 原始记录数: 0
 - 去重后记录数: 0
 
 ## 数据源状态
 - wos: skipped (disabled)
-- scopus: error (auth_forbidden) | scopus returned 401
+- scopus: error (http_400) | scopus returned 400
 - ieee: skipped (disabled)
 - springer: skipped (disabled)
 
