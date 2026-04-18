@@ -34,15 +34,15 @@ jobs:
         run: |
           python -m src.digest_pipeline --config config/sources.yaml --lookback-hours 24 --max-items 10 --output-json web/data/latest_digest.json --output-markdown web/data/latest_digest.md
 
-      - name: Commit and push if changed
-        shell: bash
+     - name: Commit and push if changed
         run: |
-          if [[ -n "$(git status --porcelain web/data/latest_digest.json web/data/latest_digest.md)" ]]; then
+          $changes = git status --porcelain web/data/latest_digest.json web/data/latest_digest.md
+          if ($changes) {
             git config user.name "github-actions[bot]"
             git config user.email "github-actions[bot]@users.noreply.github.com"
             git add web/data/latest_digest.json web/data/latest_digest.md
             git commit -m "chore: update latest digest data"
             git push
-          else
+          } else {
             echo "No digest data changes."
-          fi
+          }
