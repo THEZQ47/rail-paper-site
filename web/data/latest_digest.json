@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-04-18T10:53:12",
+  "generated_at": "2026-04-18T11:13:08",
   "window": {
-    "from_ts": "2026-04-17T10:53:10",
-    "to_ts": "2026-04-18T10:53:10"
+    "from_ts": "2026-04-17T11:13:07",
+    "to_ts": "2026-04-18T11:13:07"
   },
   "stats": {
     "total_raw_records": 0,
@@ -13,29 +13,29 @@
     {
       "source": "wos",
       "status": "skipped",
-      "reason": "auth_missing",
-      "alert": "missing_headers=X-ApiKey",
+      "reason": "disabled",
+      "alert": null,
       "record_count": 0
     },
     {
       "source": "scopus",
       "status": "error",
-      "reason": "http_400",
-      "alert": "scopus returned 400",
+      "reason": "auth_forbidden",
+      "alert": "scopus returned 401",
       "record_count": 0
     },
     {
       "source": "ieee",
       "status": "skipped",
-      "reason": "auth_missing",
-      "alert": "missing_headers=x-api-key",
+      "reason": "disabled",
+      "alert": null,
       "record_count": 0
     },
     {
       "source": "springer",
       "status": "skipped",
-      "reason": "auth_missing",
-      "alert": "missing_headers=X-ApiKey",
+      "reason": "disabled",
+      "alert": null,
       "record_count": 0
     }
   ],
