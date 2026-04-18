@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-04-18T13:12:08",
+  "generated_at": "2026-04-18T14:08:21",
   "window": {
-    "from_ts": "2026-04-17T13:12:06",
-    "to_ts": "2026-04-18T13:12:06"
+    "from_ts": "2026-04-17T14:08:19",
+    "to_ts": "2026-04-18T14:08:19"
   },
   "stats": {
     "total_raw_records": 25,
@@ -45,7 +45,7 @@
       "title": "Train rescheduling method for bi-directional disrupted metro lines under flexible train composition and short-turn strategies",
       "source": "scopus",
       "year": 2026,
-      "url": "https://api.elsevier.com/content/abstract/scopus_id/105033951640",
+      "url": "https://doi.org/10.19713/j.cnki.43-1423/u.T20250676",
       "relevance_score": 12,
       "exact_method_tags": [],
       "problem_tags": [
@@ -58,7 +58,7 @@
       "title": "A Railway Network Dataset Incorporating Multi-Type Train Operation Records and Train Scheduling",
       "source": "scopus",
       "year": 2026,
-      "url": "https://api.elsevier.com/content/abstract/scopus_id/105028284212",
+      "url": "https://doi.org/10.1038/s41597-025-06385-8",
       "relevance_score": 12,
       "exact_method_tags": [],
       "problem_tags": [
@@ -71,7 +71,7 @@
       "title": "Optimizing Train Scheduling in Heavy-Haul Railways Using Diversified Cooperative Deep Reinforcement Learning",
       "source": "scopus",
       "year": 2026,
-      "url": "https://api.elsevier.com/content/abstract/scopus_id/105023521309",
+      "url": "https://doi.org/10.1177/03611981251364832",
       "relevance_score": 10,
       "exact_method_tags": [],
       "problem_tags": [],
@@ -82,7 +82,7 @@
       "title": "Coordinative optimization strategy for group track maintenance planning and train scheduling of railways",
       "source": "scopus",
       "year": 2026,
-      "url": "https://api.elsevier.com/content/abstract/scopus_id/105028978511",
+      "url": "https://doi.org/10.1016/j.ress.2026.112272",
       "relevance_score": 10,
       "exact_method_tags": [],
       "problem_tags": [],
@@ -93,7 +93,7 @@
       "title": "A data-driven optimization approach for the integrated train scheduling and maintenance planning in high-speed railways",
       "source": "scopus",
       "year": 2026,
-      "url": "https://api.elsevier.com/content/abstract/scopus_id/105015303716",
+      "url": "https://doi.org/10.1016/j.cor.2025.107261",
       "relevance_score": 10,
       "exact_method_tags": [],
       "problem_tags": [],
@@ -104,7 +104,7 @@
       "title": "A Rolling-Horizon Framework for Integrated Freight Train Rescheduling and Track Assignment under Disruptions in Large-Scale Networks",
       "source": "scopus",
       "year": 2026,
-      "url": "https://api.elsevier.com/content/abstract/scopus_id/105029745826",
+      "url": "https://doi.org/10.1007/s10479-026-07077-1",
       "relevance_score": 9,
       "exact_method_tags": [],
       "problem_tags": [
@@ -118,7 +118,7 @@
       "title": "Stop-Skipping to Reduce Delays in Train Rescheduling",
       "source": "scopus",
       "year": 2026,
-      "url": "https://api.elsevier.com/content/abstract/scopus_id/105019313120",
+      "url": "https://doi.org/10.1007/978-3-031-90095-2_11",
       "relevance_score": 7,
       "exact_method_tags": [],
       "problem_tags": [
@@ -131,7 +131,7 @@
       "title": "Real-time metro train rescheduling under uncertainties: A hybrid machine learning and integer L-shaped approach",
       "source": "scopus",
       "year": 2026,
-      "url": "https://api.elsevier.com/content/abstract/scopus_id/105029077797",
+      "url": "https://doi.org/10.1016/j.tre.2026.104704",
       "relevance_score": 7,
       "exact_method_tags": [],
       "problem_tags": [
@@ -144,7 +144,7 @@
       "title": "Competition and cooperation evaluation for multi-modal railway network: A multi-leader–follower approach",
       "source": "scopus",
       "year": 2026,
-      "url": "https://api.elsevier.com/content/abstract/scopus_id/105027859785",
+      "url": "https://doi.org/10.1016/j.cie.2025.111759",
       "relevance_score": 7,
       "exact_method_tags": [],
       "problem_tags": [
@@ -157,7 +157,7 @@
       "title": "Capacity-utilization oriented train scheduling for busy high-speed rail based on an improved time-space network",
       "source": "scopus",
       "year": 2026,
-      "url": "https://api.elsevier.com/content/abstract/scopus_id/105024830113",
+      "url": "https://doi.org/10.1080/19427867.2025.2600543",
       "relevance_score": 7,
       "exact_method_tags": [],
       "problem_tags": [
