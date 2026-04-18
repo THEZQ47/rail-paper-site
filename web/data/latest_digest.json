@@ -1,13 +1,13 @@
 {
-  "generated_at": "2026-04-18T12:50:14",
+  "generated_at": "2026-04-18T13:12:08",
   "window": {
-    "from_ts": "2026-04-17T12:50:12",
-    "to_ts": "2026-04-18T12:50:12"
+    "from_ts": "2026-04-17T13:12:06",
+    "to_ts": "2026-04-18T13:12:06"
   },
   "stats": {
-    "total_raw_records": 0,
-    "total_unique_records": 0,
-    "card_count": 0
+    "total_raw_records": 25,
+    "total_unique_records": 25,
+    "card_count": 10
   },
   "source_results": [
     {
@@ -19,10 +19,10 @@
     },
     {
       "source": "scopus",
-      "status": "error",
-      "reason": "http_400",
-      "alert": "scopus returned 400",
-      "record_count": 0
+      "status": "ok",
+      "reason": null,
+      "alert": null,
+      "record_count": 25
     },
     {
       "source": "ieee",
@@ -39,8 +39,132 @@
       "record_count": 0
     }
   ],
-  "cards": [],
-  "notes": [
-    "今日未从已启用数据源提取到可用论文，请检查凭据或扩大检索窗口。"
-  ]
+  "cards": [
+    {
+      "rank": 1,
+      "title": "Train rescheduling method for bi-directional disrupted metro lines under flexible train composition and short-turn strategies",
+      "source": "scopus",
+      "year": 2026,
+      "url": "https://api.elsevier.com/content/abstract/scopus_id/105033951640",
+      "relevance_score": 12,
+      "exact_method_tags": [],
+      "problem_tags": [
+        "重调度"
+      ],
+      "one_line_takeaway": "主题聚焦 重调度，建议核对是否包含可证明最优的求解流程。"
+    },
+    {
+      "rank": 2,
+      "title": "A Railway Network Dataset Incorporating Multi-Type Train Operation Records and Train Scheduling",
+      "source": "scopus",
+      "year": 2026,
+      "url": "https://api.elsevier.com/content/abstract/scopus_id/105028284212",
+      "relevance_score": 12,
+      "exact_method_tags": [],
+      "problem_tags": [
+        "网络级调度"
+      ],
+      "one_line_takeaway": "主题聚焦 网络级调度，建议核对是否包含可证明最优的求解流程。"
+    },
+    {
+      "rank": 3,
+      "title": "Optimizing Train Scheduling in Heavy-Haul Railways Using Diversified Cooperative Deep Reinforcement Learning",
+      "source": "scopus",
+      "year": 2026,
+      "url": "https://api.elsevier.com/content/abstract/scopus_id/105023521309",
+      "relevance_score": 10,
+      "exact_method_tags": [],
+      "problem_tags": [],
+      "one_line_takeaway": "与列车调度有一定相关性，建议阅读全文确认模型与求解细节。"
+    },
+    {
+      "rank": 4,
+      "title": "Coordinative optimization strategy for group track maintenance planning and train scheduling of railways",
+      "source": "scopus",
+      "year": 2026,
+      "url": "https://api.elsevier.com/content/abstract/scopus_id/105028978511",
+      "relevance_score": 10,
+      "exact_method_tags": [],
+      "problem_tags": [],
+      "one_line_takeaway": "与列车调度有一定相关性，建议阅读全文确认模型与求解细节。"
+    },
+    {
+      "rank": 5,
+      "title": "A data-driven optimization approach for the integrated train scheduling and maintenance planning in high-speed railways",
+      "source": "scopus",
+      "year": 2026,
+      "url": "https://api.elsevier.com/content/abstract/scopus_id/105015303716",
+      "relevance_score": 10,
+      "exact_method_tags": [],
+      "problem_tags": [],
+      "one_line_takeaway": "与列车调度有一定相关性，建议阅读全文确认模型与求解细节。"
+    },
+    {
+      "rank": 6,
+      "title": "A Rolling-Horizon Framework for Integrated Freight Train Rescheduling and Track Assignment under Disruptions in Large-Scale Networks",
+      "source": "scopus",
+      "year": 2026,
+      "url": "https://api.elsevier.com/content/abstract/scopus_id/105029745826",
+      "relevance_score": 9,
+      "exact_method_tags": [],
+      "problem_tags": [
+        "网络级调度",
+        "重调度"
+      ],
+      "one_line_takeaway": "主题聚焦 网络级调度, 重调度，建议核对是否包含可证明最优的求解流程。"
+    },
+    {
+      "rank": 7,
+      "title": "Stop-Skipping to Reduce Delays in Train Rescheduling",
+      "source": "scopus",
+      "year": 2026,
+      "url": "https://api.elsevier.com/content/abstract/scopus_id/105019313120",
+      "relevance_score": 7,
+      "exact_method_tags": [],
+      "problem_tags": [
+        "重调度"
+      ],
+      "one_line_takeaway": "主题聚焦 重调度，建议核对是否包含可证明最优的求解流程。"
+    },
+    {
+      "rank": 8,
+      "title": "Real-time metro train rescheduling under uncertainties: A hybrid machine learning and integer L-shaped approach",
+      "source": "scopus",
+      "year": 2026,
+      "url": "https://api.elsevier.com/content/abstract/scopus_id/105029077797",
+      "relevance_score": 7,
+      "exact_method_tags": [],
+      "problem_tags": [
+        "重调度"
+      ],
+      "one_line_takeaway": "主题聚焦 重调度，建议核对是否包含可证明最优的求解流程。"
+    },
+    {
+      "rank": 9,
+      "title": "Competition and cooperation evaluation for multi-modal railway network: A multi-leader–follower approach",
+      "source": "scopus",
+      "year": 2026,
+      "url": "https://api.elsevier.com/content/abstract/scopus_id/105027859785",
+      "relevance_score": 7,
+      "exact_method_tags": [],
+      "problem_tags": [
+        "网络级调度"
+      ],
+      "one_line_takeaway": "主题聚焦 网络级调度，建议核对是否包含可证明最优的求解流程。"
+    },
+    {
+      "rank": 10,
+      "title": "Capacity-utilization oriented train scheduling for busy high-speed rail based on an improved time-space network",
+      "source": "scopus",
+      "year": 2026,
+      "url": "https://api.elsevier.com/content/abstract/scopus_id/105024830113",
+      "relevance_score": 7,
+      "exact_method_tags": [],
+      "problem_tags": [
+        "网络级调度"
+      ],
+      "one_line_takeaway": "主题聚焦 网络级调度，建议核对是否包含可证明最优的求解流程。"
+    }
+  ],
+  "notes": []
 }
