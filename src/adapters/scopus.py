@@ -117,9 +117,17 @@ def _split_authors(creator: Any) -> list[str]:
 def _extract_url(row: Mapping[str, Any]) -> str:
     links = row.get("link")
     if isinstance(links, list):
+        # 1. 优先寻找供人类阅读的 Scopus 网页链接
         for entry in links:
-            if isinstance(entry, Mapping) and entry.get("@href"):
+            if isinstance(entry, Mapping) and entry.get("@rel") == "scopus" and entry.get("@href"):
                 return str(entry["@href"])
+                
+    # 2. 如果没找到，优先拼接全球通用的 DOI 链接（直接跳到出版商官网，看文献最方便）
+    doi = row.get("prism:doi")
+    if doi:
+        return f"https://doi.org/{doi}"
+        
+    # 3. 最差的情况才返回它原始的 API 链接
     return str(row.get("prism:url") or "")
 
 
