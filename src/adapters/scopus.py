@@ -38,13 +38,19 @@ class ScopusAdapter(HttpPaperAdapter):
         cursor: str | None,
     ) -> dict[str, Any]:
         start = int(cursor) if cursor else 0
-        date_range = f"{from_ts.year}-{to_ts.year}"
+        
+        # 优化日期格式：如果是同一年就传单一年份，不同年就传范围
+        if from_ts.year == to_ts.year:
+            date_range = str(from_ts.year)
+        else:
+            date_range = f"{from_ts.year}-{to_ts.year}"
+            
         return {
             "query": f"{query} AND PUBYEAR AFT {from_ts.year - 1} AND PUBYEAR BEF {to_ts.year + 1}",
             "count": self.page_size,
             "start": start,
             "date": date_range,
-            "view": "COMPLETE",
+            "view": "STANDARD",  # <--- 核心修改：从 COMPLETE 改为 STANDARD！
         }
 
     def parse_records(self, payload: Mapping[str, Any]) -> list[PaperRecord]:
