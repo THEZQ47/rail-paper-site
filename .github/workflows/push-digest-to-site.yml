@@ -1,6 +1,9 @@
 name: Push Digest To Site
 
 on:
+  push:
+    branches:
+      - main
   schedule:
     - cron: "*/30 * * * *"
   workflow_dispatch:
@@ -20,9 +23,9 @@ jobs:
         uses: actions/checkout@v4
 
       #- name: Setup Python
-        #uses: actions/setup-python@v5
-       # with:
-         # python-version: "3.12"
+      #  uses: actions/setup-python@v5
+      #  with:
+      #    python-version: "3.12"
 
       - name: Build latest digest data
         env:
@@ -34,7 +37,7 @@ jobs:
         run: |
           python -m src.digest_pipeline --config config/sources.yaml --lookback-hours 24 --max-items 10 --output-json web/data/latest_digest.json --output-markdown web/data/latest_digest.md
 
-     - name: Commit and push if changed
+      - name: Commit and push if changed
         run: |
           $changes = git status --porcelain web/data/latest_digest.json web/data/latest_digest.md
           if ($changes) {
@@ -45,4 +48,4 @@ jobs:
             git push
           } else {
             echo "No digest data changes."
-          } 
+          }
