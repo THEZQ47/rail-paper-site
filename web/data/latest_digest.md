@@ -1,15 +1,15 @@
 # 轨道交通列车调度文献日报
 
-- 生成时间: 2026-04-18 10:53:12
-- 检索窗口: 2026-04-17 10:53 ~ 2026-04-18 10:53
+- 生成时间: 2026-04-18 11:14:20
+- 检索窗口: 2026-04-17 11:14 ~ 2026-04-18 11:14
 - 原始记录数: 0
 - 去重后记录数: 0
 
 ## 数据源状态
-- wos: skipped (auth_missing) | missing_headers=X-ApiKey
+- wos: skipped (disabled)
 - scopus: error (http_400) | scopus returned 400
-- ieee: skipped (auth_missing) | missing_headers=x-api-key
-- springer: skipped (auth_missing) | missing_headers=X-ApiKey
+- ieee: skipped (disabled)
+- springer: skipped (disabled)
 
 ## 今日结果
 - 未取到可用论文。

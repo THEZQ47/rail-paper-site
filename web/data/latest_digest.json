@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-04-18T10:53:12",
+  "generated_at": "2026-04-18T11:14:20",
   "window": {
-    "from_ts": "2026-04-17T10:53:10",
-    "to_ts": "2026-04-18T10:53:10"
+    "from_ts": "2026-04-17T11:14:18",
+    "to_ts": "2026-04-18T11:14:18"
   },
   "stats": {
     "total_raw_records": 0,
@@ -13,8 +13,8 @@
     {
       "source": "wos",
       "status": "skipped",
-      "reason": "auth_missing",
-      "alert": "missing_headers=X-ApiKey",
+      "reason": "disabled",
+      "alert": null,
       "record_count": 0
     },
     {
@@ -27,15 +27,15 @@
     {
       "source": "ieee",
       "status": "skipped",
-      "reason": "auth_missing",
-      "alert": "missing_headers=x-api-key",
+      "reason": "disabled",
+      "alert": null,
       "record_count": 0
     },
     {
       "source": "springer",
       "status": "skipped",
-      "reason": "auth_missing",
-      "alert": "missing_headers=X-ApiKey",
+      "reason": "disabled",
+      "alert": null,
       "record_count": 0
     }
   ],
