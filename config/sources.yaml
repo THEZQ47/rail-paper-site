@@ -29,7 +29,6 @@
       "auth": {
         "header_from_env": {
           "X-ELS-APIKey": "SCOPUS_API_KEY",
-          "X-ELS-Insttoken": "SCOPUS_INST_TOKEN"
         }
       },
       "retry": {
