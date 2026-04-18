@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-04-17T12:58:07",
+  "generated_at": "2026-04-18T10:53:12",
   "window": {
-    "from_ts": "2026-04-16T12:58:07",
-    "to_ts": "2026-04-17T12:58:07"
+    "from_ts": "2026-04-17T10:53:10",
+    "to_ts": "2026-04-18T10:53:10"
   },
   "stats": {
     "total_raw_records": 0,
@@ -20,8 +20,8 @@
     {
       "source": "scopus",
       "status": "error",
-      "reason": "auth_forbidden",
-      "alert": "scopus returned 401",
+      "reason": "http_400",
+      "alert": "scopus returned 400",
       "record_count": 0
     },
     {
