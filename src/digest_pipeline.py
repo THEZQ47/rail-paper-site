@@ -14,8 +14,8 @@ from src.auth import SourceAuthProvider
 from src.schemas import DigestCard, DigestReport, PaperRecord, SourceResult
 
 DEFAULT_QUERY = (
-    "\"train scheduling\" OR \"train rescheduling\" OR \"railway timetable\" "
-    "OR \"rail transit dispatching\""
+    "TITLE-ABS-KEY(\"train scheduling\" OR \"train rescheduling\" OR \"railway timetable\" "
+    "OR \"rail transit dispatching\")"
 )
 
 RAIL_SCOPE_TERMS = [
