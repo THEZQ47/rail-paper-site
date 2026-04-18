@@ -7,7 +7,7 @@
   },
   "sources": {
     "wos": {
-      "enabled": true,
+      "enabled": false,
       "base_url": "https://api.clarivate.com/apis/wos-starter/v1/documents",
       "rate_limit_per_minute": 30,
       "auth_mode": "api_key",
@@ -38,7 +38,7 @@
       }
     },
     "ieee": {
-      "enabled": true,
+      "enabled": false,
       "base_url": "https://ieeexploreapi.ieee.org/api/v1/search/articles",
       "rate_limit_per_minute": 20,
       "auth_mode": "api_key",
@@ -53,7 +53,7 @@
       }
     },
     "springer": {
-      "enabled": true,
+      "enabled": false,
       "base_url": "https://api.springernature.com/metadata/json",
       "rate_limit_per_minute": 20,
       "auth_mode": "api_key",
